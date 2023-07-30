@@ -11,11 +11,18 @@ After some tinkering, I found it to be much more reliable if I detected lines us
 ![image](https://github.com/cascino/metalDimInspect/assets/103715998/7bc0cac1-5618-4155-8f17-f4437a3f81bd)
 
 This proved to be so-so, since the camera was not to move on the production line anyways. However, if you notice that there are two lines in the top right corner, you might realize one pitfall of the line detection method, which was that there was no reliable way to deal with incisions along the metal surface being detected as potential candidates for the hough line function. I tackled this by just picking the line with the most "votes", since the hough line function returned a list of lines in the image sorted by vote confidence. 
+
 ![image](https://github.com/cascino/metalDimInspect/assets/103715998/3b5a750d-b7f4-4174-a24e-493a803f1c8e)
+
 This was not super satisfactory, since sometimes the lines with the most confidence were still wrong lines. Instead, I began playing around with the idea of first finding some possible lines candidates, and then "zooming" in on their regions again, but this time to process with more confidence. This process proved to be much more accurate, since a) the built in Canny function works better on smaller images, and b) I could manually adjust the parameters for finding lines, processing the image, etc. on the smaller regions. 
+
 ![image](https://github.com/cascino/metalDimInspect/assets/103715998/7fc0ecca-80b7-41cf-91b1-384e7f5d06a9)
+
 After processing the individual "snippets", I would find their new coordinates on their shifted canvases and apply an offset to bring them back to where they originally were on the source image. Here are the calculated pixel results of a few trials. Since we know that the sheet metal (before shearing at least) is rectangular, any differences between side measurements are error. For this camera, 10 pixels is about 2mm, which is beyond the tolerance level for the customers needs. 
+
 ![image](https://github.com/cascino/metalDimInspect/assets/103715998/ca110bca-1c8a-4691-9036-ff66dfdd1d6d)
+
+
 # Next Steps
 The week beginning july 31 will see the installation of another prototype camera above the shear line. I will be working with people on the floor to try and see if this early stage of a dimension measurement system is of any use. I may also get a chance to perhaps integrate some form of template matching, but I am afraid that the time will be too long. Since this is a live process, I was given the restraint that the robots could not wait on the line for more than half a second.
 
