@@ -8,7 +8,8 @@ Initially, I thought that I could just find a rough estimate of the maximum fore
 
 After some tinkering, I found it to be much more reliable if I detected lines using the built in opencv Hough line transform algoithms. Although they are better for detecting lines rather than measuring them precisely, it was a step in the right direction. I thought that the individual lines would not be subject to the "snapping" nature of the bounding box function. One thing that was particularly tricky about this approach was finding the intersections. The problem was that if I were to iterate through all of the lines and determine the intersections that they had with the other lines, I may have ended up with the possiblity of intersecting two lines that were near-parallel. I decided to tackle this by creating four "filter" lines that would detect if another line intersected with it, and verify that the point of intersection was within the screen. 
 
-![image](https://github.com/cascino/metalDimInspect/assets/103715998/57b585e3-b143-48dc-bc74-88a9505fc1c7)
+![image](https://github.com/cascino/metalDimInspect/assets/103715998/f4213317-2853-4272-aa14-591bc6f95867)
+
 
 
 This proved to be so-so, since the camera was not to move on the production line anyways. However, if you notice that there are two lines in the top right corner, you might realize one pitfall of the line detection method, which was that there was no reliable way to deal with incisions along the metal surface being detected as potential candidates for the hough line function. I tackled this by just picking the line with the most "votes", since the hough line function returned a list of lines in the image sorted by vote confidence. 
