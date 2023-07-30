@@ -20,7 +20,8 @@ This proved to be so-so, since the camera was not to move on the production line
 
 This was not super satisfactory, since sometimes the lines with the most confidence were still wrong lines. Instead, I began playing around with the idea of first finding some possible lines candidates, and then "zooming" in on their regions again, but this time to process with more confidence. This process proved to be much more accurate, since a) the built in Canny function works better on smaller images, and b) I could manually adjust the parameters for finding lines, processing the image, etc. on the smaller regions. 
 
-![image](https://github.com/cascino/metalDimInspect/assets/103715998/7fc0ecca-80b7-41cf-91b1-384e7f5d06a9)
+![image](https://github.com/cascino/metalDimInspect/assets/103715998/66b26d26-7dcf-44b5-ab38-8b713185e1dc)
+
 
 After processing the individual "snippets", I would find their new coordinates on their shifted canvases and apply an offset to bring them back to where they originally were on the source image. Here are the calculated pixel results of a few trials. Since we know that the sheet metal (before shearing at least) is rectangular, any differences between side measurements are error. For this camera, 10 pixels is about 2mm, which is beyond the tolerance level for the customers needs. 
 
